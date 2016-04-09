@@ -1,0 +1,7 @@
+Encoder Input		: input.txt
+
+Encoder Ouput		: input.lzw
+
+Decoder Input		: input.lzw
+
+Decoder Output		: input_decoded.txt

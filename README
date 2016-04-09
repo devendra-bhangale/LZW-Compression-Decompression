@@ -1,0 +1,49 @@
+/*
+ * File:				README
+ * 
+ * Author:			Devendra Bhangale
+ * 
+ * Student ID:			800865673
+ * 
+ * Email ID:			dbhangal@uncc.edu
+ * 
+ * Description:		Summary of Project 1: LZW Compression and Decompression.
+ */
+
+PROGRAMMING LANGUAGE:	Java
+COMPILER VERSION:		JDK 1.8.0_74
+
+
+BREAKDOWN OF FILES:
+1] Encoder.java:-	Class file: used for encoding. Input: original '.txt' file. Output: encoded '.lzw' file.
+2] Decoder.java:-	Class file: used for decoding. Input: encoded '.lzw' file. Output: decoded '_decoded.txt' file.
+3] README:-	Summary of Project.
+
+
+TO RUN PROJECT:
+1] Copy the 'Encoder.java' and 'Decoder.java' class files in a folder.
+2] Put the input '.txt' file in the same folder.
+3] Use the command: 'javac Encoder.java' and 'javac Decoder.java' to compile and create the executables.
+4] Then run the encoder first using command: 'java Encoder <your .txt input file>  <bit length>'. The output of this will be an encoded file, saved in the same working directory with name: '<your input file>.lzw'.
+5] Then run the decoder using command: 'java Decoder <your input file.lzw file>  <bit length>'. The output of this will be a decoded file, saved in the same working directory with name: '<your input file>_decoded.txt'.
+6] Repeat steps 4 and 5 for multiple input files.
+
+
+PROGRAM DESIGN:
+1] Encoder.java:
+
+Data Structure for Table: ArrayList<String> which takes O(1) time to add/fetch a code and O(n) for search.
+
+Commandline input is taken for the original input '.txt' file and the bit length for codes. File Reader is used to read the original '.txt' file and File Output Stream to output the codes for encoded data in UTF-16BE in the '.lzw' file. The Table is implemented with ArrayList of strings. It is initialized with the 'initTable()' function with the 256 extended ASCII characters at their corresponding indices. New codes generated will be added from index number 256 through max table size defined by bit length. The pseudo code is implemented to perform encoding and the line feed character is handled as per requirement; this is because it is removed while reading lines using readline(). Entire logic is placed in 'try-catch' to catch any exceptions. Later all cleanup code is placed in the 'finally' block. 
+
+2] Decoder.java:
+
+Data Structure for Table: ArrayList<String> which takes O(1) time to add/fetch a code and O(n) for search.
+
+Commandline input is taken for the encoded '.lzw' file and the bit length for codes. File Input Stream is used to read the encoded '.lzw' file and File Writer to output the encoded data in UTF-8 in the '_decoded.txt' file. The Table is implemented with ArrayList of strings. It is initialized with the 'initTable()' function with the 256 extended ASCII characters at their corresponding indices. New codes generated will be added from index number 256 through max table size defined by bit length. The pseudo code is implemented to perform decoding and the line feed character is handled as per requirement; this is because it is removed while reading lines using readline(). Entire logic is placed in 'try-catch' to catch any exceptions. Later all cleanup code is placed in the 'finally' block. 
+
+
+WHAT WORKS AND WHAT FAILS:
+Some txt files have an End-of-file character while some dont. Since, there is no special ASCII code for this character, this project does not take into account this character. So if an original txt file has this character, the decoded output will not have it, and hence its size will be 1 byte less than the original file.
+Every other symbol, white space works.
+
